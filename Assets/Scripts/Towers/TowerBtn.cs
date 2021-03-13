@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class TowerBtn : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject towerObject;
-
-    [SerializeField]
-    private Sprite dragSprite;
+    [SerializeField] private GameObject towerObject;
+    [SerializeField] private Sprite dragSprite;
 
     public GameObject TowerObject
     {

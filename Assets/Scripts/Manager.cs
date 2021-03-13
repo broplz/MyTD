@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Manager : Loader<Manager> 
 {
-	[SerializeField]
-    private GameObject spawnPoint;
-	[SerializeField]
-    private GameObject[] enemies;
-	[SerializeField]
-    private int maxEnemiesOnScreen;
-	[SerializeField]
-    private int totalEnemies;
-	[SerializeField]
-    private int enemiesPerSpawn;
+	[SerializeField] private GameObject spawnPoint;
+	[SerializeField] private GameObject[] enemies;
+	[SerializeField] private int maxEnemiesOnScreen;
+	[SerializeField] private int totalEnemies;
+	[SerializeField] private int enemiesPerSpawn;
+
+    public List<Enemy> EnemyList = new List<Enemy>();
     
 	private const float spawnDelay = 0.5f;
-    private int enemiesOnScreen = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -28,15 +25,14 @@ public class Manager : Loader<Manager>
     
     IEnumerator Spawn()
     {
-        if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies)
+        if (enemiesPerSpawn > 0 && EnemyList.Count < totalEnemies)
         {
             for (int i = 0; i < enemiesPerSpawn; i++)
             {
-                if (enemiesOnScreen < maxEnemiesOnScreen)
+                if (EnemyList.Count < maxEnemiesOnScreen)
                 {
                     GameObject newEnemy = Instantiate(enemies[0]) as GameObject;
                     newEnemy.transform.position = spawnPoint.transform.position;
-                    enemiesOnScreen += 1;
                 }
             }
 		yield return new WaitForSeconds(spawnDelay);
@@ -44,11 +40,23 @@ public class Manager : Loader<Manager>
         }
     }
 
-    public void removeEnemyFromScreen()
+    public void RegisterEnemy(Enemy enemy)
     {
-        if (enemiesOnScreen > 0)
+        EnemyList.Add(enemy);
+    }
+
+    public void UnregisterEnemy(Enemy enemy)
+    {
+        EnemyList.Remove(enemy);
+        Destroy(enemy.gameObject);
+    }
+
+    public void DestroyEnemies()
+    {
+        foreach (Enemy enemy in EnemyList)
         {
-            enemiesOnScreen -= 1;
+            Destroy(enemy.gameObject);
         }
+        EnemyList.Clear();
     }
 }

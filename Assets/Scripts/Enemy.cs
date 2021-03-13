@@ -1,57 +1,77 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     private int target = 0;
-	[SerializeField]
-    private Transform exit;
-	[SerializeField]
-    private Transform[] wayPoints;
-	[SerializeField]
-    private float navigation;
+    private GameObject[] wayPoints;
+	[SerializeField] private float navigation;
+    [SerializeField] private int health;
+    [SerializeField] private float speed = 0.1f;
 
     private Transform enemy;
     private float navigationTime = 0;
-      
+
+    private void Awake()
+    {
+        wayPoints = GameObject.FindGameObjectsWithTag("MovingPoint");
+        Debug.Log($"Waypoint length {wayPoints.Length}");
+    }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         enemy = GetComponent<Transform>();
+        Manager.Instance.RegisterEnemy(this);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (wayPoints != null)
         {
-            navigationTime += Time.deltaTime;
+            navigationTime += Time.deltaTime * speed;
             if (navigationTime > navigation)
             {
-                if (target < wayPoints.Length)
-                {
-                    enemy.position = Vector2.MoveTowards(enemy.position, wayPoints[target].position, navigationTime);
-                }
-                else
-                {
-                    enemy.position = Vector2.MoveTowards(enemy.position, exit.position, navigationTime);
-                }
+                enemy.position = Vector2.MoveTowards(enemy.position, 
+                    wayPoints[target].transform.position, navigationTime);
                 navigationTime = 0;
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "MovingPoint")
+        if (collision.CompareTag("MovingPoint"))
         {
             target += 1;
         }
-        else if (collision.tag == "Finish")
+        if (target == wayPoints.Length)
         {
-            Manager.Instance.removeEnemyFromScreen();
-            Destroy(gameObject);
+            Manager.Instance.UnregisterEnemy(this);
+            Debug.Log($"target {target}");
+        }
+        else if (collision.CompareTag("Projectile"))
+        {
+            Projectile newP = collision.gameObject.GetComponent<Projectile>();
+            EnemyHit(newP.AttackDamage);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void EnemyHit(int hitpoints)
+    {
+        if (health - hitpoints > 0)
+        {
+            //enemy hurts
+            health -= hitpoints;
+        }
+        else
+        {
+            //enemy dies
+            
         }
     }
 }

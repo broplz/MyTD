@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 385169495737810081}
   - component: {fileID: 5758937883240234480}
   - component: {fileID: 3892687815463906078}
-  - component: {fileID: 4150771782957111013}
+  - component: {fileID: 4882354079515777690}
   m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
@@ -98,26 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef166905152187cc8add3ce4cdd30b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 0
-  exit: {fileID: 8709341303921575958, guid: 948969a44e9527f0f8d370429d4bf474, type: 3}
-  wayPoints:
-  - {fileID: 4687621416298023323, guid: 51da3580085fd57d790a0392bf7993c2, type: 3}
-  - {fileID: 2646077504766041029, guid: 0821b5b0323670a82bcd414fd283bd3b, type: 3}
-  - {fileID: 1411340585187159357, guid: ddc471f77f603ef66b3346ccb9e1ddf7, type: 3}
-  - {fileID: 3531891021093761006, guid: 71789ed97fd52c0f6b9f9dc2f0f71ca6, type: 3}
-  - {fileID: 1696922525894251096, guid: 2dbb3931772052d298b1131285af85e3, type: 3}
-  - {fileID: 3494696558635154363, guid: 5c77b47406e8c2de5bd9edf44d9ccc71, type: 3}
-  - {fileID: 8045116224829356793, guid: 60363eb48a2d2622ba76b404a24eac02, type: 3}
-  - {fileID: 5872539422269973632, guid: 689e6895249db505d81081f3d4898a30, type: 3}
-  - {fileID: 6795730255386607238, guid: b5ad2fa35ff33adfcb439b6fd9f9f126, type: 3}
-  - {fileID: 406673764476443428, guid: ff7e6976a44ee32ff9284d368beeb370, type: 3}
-  - {fileID: 7958935887641489624, guid: 62d6e334116695827ad8f50769bb2cec, type: 3}
-  - {fileID: 2124496581845964861, guid: e0044781988927884a9fbeb2ee44ee8e, type: 3}
-  - {fileID: 6534409474591514557, guid: 4a2062fdfaaaa0140a8f192d0eb7c218, type: 3}
-  - {fileID: 6574807126456110472, guid: b8a0f8f490116f87ca42e104d76ddaf9, type: 3}
-  - {fileID: 1258408678601950907, guid: 4d36165b7efb3114eac16caa48f8bf75, type: 3}
-  - {fileID: 1771579026707709573, guid: 366054eb99f12fed0a8a4216250494f6, type: 3}
   navigation: 0
+  health: 0
+  speed: 1
 --- !u!95 &5758937883240234480
 Animator:
   serializedVersion: 3
@@ -158,8 +141,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &4150771782957111013
-BoxCollider2D:
+--- !u!60 &4882354079515777690
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,7 +154,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.19}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -181,6 +164,60 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.19}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.18249999, y: -0.235}
+      - {x: 0.21, y: -0.19999999}
+      - {x: 0.2225, y: -0.1725}
+      - {x: 0.22, y: -0.125}
+      - {x: 0.2325, y: -0.1375}
+      - {x: 0.275, y: -0.122499995}
+      - {x: 0.2825, y: -0.082499996}
+      - {x: 0.2925, y: -0.012499999}
+      - {x: 0.33499998, y: 0.105}
+      - {x: 0.3575, y: 0.16749999}
+      - {x: 0.3575, y: 0.2025}
+      - {x: 0.3425, y: 0.24499999}
+      - {x: 0.3125, y: 0.275}
+      - {x: 0.29, y: 0.29}
+      - {x: 0.2625, y: 0.29}
+      - {x: 0.25, y: 0.2775}
+      - {x: 0.19999999, y: 0.21499999}
+      - {x: 0.18249999, y: 0.21}
+      - {x: 0.155, y: 0.235}
+      - {x: 0.13499999, y: 0.24749999}
+      - {x: 0.0925, y: 0.26999998}
+      - {x: 0.0075, y: 0.28}
+      - {x: -0.035, y: 0.2775}
+      - {x: -0.0975, y: 0.26}
+      - {x: -0.1325, y: 0.2375}
+      - {x: -0.17, y: 0.21}
+      - {x: -0.2375, y: 0.2375}
+      - {x: -0.2525, y: 0.26749998}
+      - {x: -0.275, y: 0.2825}
+      - {x: -0.29, y: 0.2825}
+      - {x: -0.3075, y: 0.26999998}
+      - {x: -0.315, y: 0.2525}
+      - {x: -0.32, y: 0.235}
+      - {x: -0.32, y: 0.1775}
+      - {x: -0.31, y: 0.145}
+      - {x: -0.2825, y: 0.12}
+      - {x: -0.225, y: 0.089999996}
+      - {x: -0.22749999, y: 0.012499999}
+      - {x: -0.21499999, y: -0.0475}
+      - {x: -0.2025, y: -0.082499996}
+      - {x: -0.1725, y: -0.12}
+      - {x: -0.1725, y: -0.1375}
+      - {x: -0.19999999, y: -0.17999999}
+      - {x: -0.2025, y: -0.2075}
+      - {x: -0.205, y: -0.265}
+      - {x: -0.185, y: -0.29}
+      - {x: -0.145, y: -0.3125}
+      - {x: -0.1125, y: -0.3275}
+      - {x: -0.0625, y: -0.3475}
+      - {x: -0.01, y: -0.35}
+      - {x: 0.082499996, y: -0.35}
+      - {x: 0.105, y: -0.345}
+      - {x: 0.12, y: -0.325}
+      - {x: 0.1275, y: -0.2725}
+      - {x: 0.16749999, y: -0.2575}
